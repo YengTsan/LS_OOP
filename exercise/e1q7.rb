@@ -1,0 +1,1 @@
+class and an encoding of the object id to the console
