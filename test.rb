@@ -1,62 +1,32 @@
-class Person
-  attr_accessor :name, :age
+class Dog
+  attr_accessor :name, :age, :breed, :vaccinated, :wormed 
 
-  def initialize(name, age)
+  def initialize(name, age, breed, vaccinated, wormed)
     @name = name
     @age = age
+    @breed = breed
+    @vaccinated = vaccinated
+    @wormed = wormed
+  end
+  
+  def check_dog
+    if vaccinated? && wormed
+      puts "#{name} can bo accepted"
+    elsif vaccinated || wormed
+      puts "#{name} can only be accepted by itself"
+    else
+      puts "#{name} can not be accepted"
+    end
   end
 
-  def >(other_person)
-    age > other_person.age
-  end
-end
-
-bob = Person.new("Bob", 49)
-kim = Person.new("Kim", 33)
-
-class Team
-  attr_accessor :name, :members
-  def initialize(name)
-    @name = name
-    @members = []
+  def vaccinated?
+    vaccinated
   end
 
-  def <<(person)
-    members.push person
-  end
-
-  def +(other_team)
-    temp_team = Team.new("Temporary Team")
-    temp_team.members = members + other_team.members
-    temp_team
-  end
-
-  def [](idx)
-    members[idx]
-  end
-
-  def []=(idx, obj)
-    members[idx] = obj
+  def wormed?
+    wormed
   end
 end
 
-# we'll use the same Person class from earlier
-
-cowboys = Team.new("Dallas Cowboys")
-cowboys.members << Person.new("Troy Aikman", 48)
-cowboys.members << Person.new("Emmitt Smith", 46)
-cowboys.members << Person.new("Michael Irvin", 49)
-
-
-niners = Team.new("San Francisco 49ers")
-niners.members << Person.new("Joe Montana", 59)
-niners.members << Person.new("Jerry Rice", 52)
-niners.members << Person.new("Deion Sanders", 47)
-
-p cowboys
-
-p niners
-
-dream_team = cowboys + niners  
-
-p dream_team[0]
+Dog.new("Spot", 5, "Labrador", true, false).check_dog
+Dog.new("Riley", 3, "GoldenDoodle", true, true).check_dog
